@@ -133,7 +133,7 @@ const Register = () => {
               <div className="form-group">
                 <label>Full Name</label>
                 <input
-                  placeholder="John Doe"
+                  placeholder="Mohamed"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
@@ -146,7 +146,7 @@ const Register = () => {
                 <label>Email Address</label>
                 <input
                   type="email"
-                  placeholder="johndoe@example.com"
+                  placeholder="mohamed@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

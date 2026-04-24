@@ -83,7 +83,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
-                placeholder="johndoe@example.com"
+                placeholder="mohamed@example.com"
                 className="input"
               />
             </div>
