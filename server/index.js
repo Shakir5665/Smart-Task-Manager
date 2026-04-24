@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get("/ping", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'ok',
