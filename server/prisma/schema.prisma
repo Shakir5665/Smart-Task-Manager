@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -24,7 +24,7 @@ model Task {
   id          Int        @id @default(autoincrement())
   title       String
   description String?
-  status      TaskStatus @default(PENDING)
+  status      String     @default("PENDING") // PENDING or COMPLETED
   priority    Int        @default(1) // E.g., 1 (Low), 2 (Medium), 3 (High)
   dueDate     DateTime?
   userId      Int
@@ -39,9 +39,4 @@ model Category {
   userId  Int
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   tasks   Task[]
-}
-
-enum TaskStatus {
-  PENDING
-  COMPLETED
 }

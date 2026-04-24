@@ -1,175 +1,135 @@
-<div align="center">
-  <img src="./client/public/assets/logo.png" alt="Smart Task Manager Logo" width="100"/>
-  <h1>Smart Task Manager</h1>
-  <p>A full-stack, highly scalable productivity application designed to organize workflows with a modern, glassmorphism-inspired UI.</p>
+# Smart Task Manager
 
-  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-  [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-  [![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
-  [![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)](https://prisma.io/)
-  [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org/)
-</div>
+A full-stack task management application with authentication, category-based organization, and a responsive dashboard UI.
 
----
+## Overview
 
-## 📖 Overview
+Smart Task Manager helps users:
+- register and sign in securely
+- create, edit, complete, and delete tasks
+- organize tasks with custom categories
+- manage tasks in a mobile-friendly and desktop-friendly interface
 
-**Smart Task Manager** is a production-ready, full-stack web application engineered to dramatically improve personal and professional productivity. Designed with a clean, modern aesthetic utilizing a custom UI system, it provides a seamless user experience for managing daily tasks and projects. 
-
-This project was built from the ground up to demonstrate a solid understanding of **Clean Architecture**, **RESTful API design**, **Relational Database Modeling**, and **Modern UI/UX principles**.
-
----
-
-## ✨ Key Features
-
-- **Robust Authentication:** Secure JWT-based authentication system with encrypted passwords using bcryptjs, featuring customized login/registration experiences and secure logout confirmation modals.
-- **Advanced Task Management:** Full CRUD operations for tasks with support for titles, descriptions, due dates, priorities (Low, Medium, High), and completion statuses.
-- **Categorization System:** Organize tasks into custom categories/projects with a unified filtering sidebar. User specific isolation guarantees privacy.
-- **Validation & Security:** Incoming API requests are strictly validated using `Zod` middleware, preventing malformed data and reinforcing security.
-- **Database Architecture:** Optimized PostgreSQL relational schemas managed and queried beautifully through the Prisma ORM.
-- **Responsive & Modern UI:** A fully responsive, handcrafted CSS design system leveraging variables, flexbox, grid, and subtle micro-animations (bypassing the need for heavy external component libraries).
-
----
-
-## 🛠️ Technology Stack
-
-### Frontend Architecture
-- **Framework:** React 18+ (bootstrapped with Vite for instant server start & HMR)
-- **Routing:** React Router DOM (v6) for seamless Single Page Application (SPA) navigation.
-- **State Management:** React Hooks (`useState`, `useEffect`, `useCallback`)
-- **HTTP Client:** Axios (configured with interceptors for automatic JWT attachment).
-- **Styling:** Vanilla CSS with custom design tokens, modern gradient schemes, and a mobile-first philosophy.
-
-### Backend Architecture
-- **Runtime Environment:** Node.js
-- **Web Framework:** Express.js utilizing MVC (Model-View-Controller) structure for clean separation of concerns.
-- **Database ORM:** Prisma Client - Ensuring type safety and simplified database migrations.
-- **Database:** PostgreSQL (Cloud or Local).
-- **Security & Utilities:** `jsonwebtoken` for stateless auth, `bcryptjs` for hashing passwords, `zod` for payload validation, `dotenv` for environment management, `cors` for cross-origin configuration.
-
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```text
 smart-task-manager/
-├── client/                 # Frontend React application (Vite)
-│   ├── public/             # Static assets
-│   └── src/                # Frontend source code
-│       ├── api/            # API service calls (Axios)
-│       ├── assets/         # Images and other stylistic assets
-│       ├── components/     # Reusable React components
-│       ├── pages/          # Main application pages
-│       ├── App.jsx         # Main React component
-│       └── main.jsx        # Frontend entry point
-├── config/                 # Backend configuration files
-├── controllers/            # Backend request handlers
-├── middleware/             # Express middlewares (Auth, Error handling, etc.)
-├── prisma/                 # Database schema and migrations
-├── routes/                 # Express API routes
-├── validators/             # Zod validation schemas
-├── .env                    # Environment variables
-├── package.json            # Backend dependencies and project scripts
-└── server.js               # Backend Express application entry point
+├── client/          # React + Vite frontend
+├── server/          # Express + Prisma backend
+├── README.md
+└── .gitignore
 ```
 
----
+## Tech Stack
 
-## 🗄️ Database Schema (Prisma)
+- Frontend: React, Vite, React Router, Axios
+- Backend: Node.js, Express, Prisma ORM, PostgreSQL
+- Auth: JWT, bcryptjs
 
-The database strictly enforces relational constraints. Below is a high-level Entity Relationship overview:
+## Prerequisites
 
-- **`User`**: Core entity (Fields: `id`, `name`, `email`, `password`, `createdAt`). Has One-to-Many relationships with both Tasks and Categories.
-- **`Category`**: Groupings for Tasks (Fields: `id`, `name`, `userId`). Cascades on User deletion.
-- **`Task`**: The work items (Fields: `id`, `title`, `description`, `status` (Enum), `priority`, `dueDate`, `userId`, `categoryId`). Maps to specific users and categories.
+- Node.js 18+
+- npm
+- PostgreSQL database
 
----
+## Getting Started
 
-## 🚀 Getting Started
+### 1) Clone and Install
 
-Follow these instructions to get a local copy up and running safely.
+```bash
+git clone <your-repo-url>
+cd "Smart Task Manager"
+```
 
-### Prerequisites
+Install dependencies:
 
-- Node.js (v18.x or later)
-- PostgreSQL (Installed locally or accessible via a cloud provider like Supabase/Neon)
+```bash
+cd server && npm install
+cd ../client && npm install
+```
 
-### Installation
+### 2) Configure Environment Variables
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Shakir5665/smart-task-manager.git
-   cd smart-task-manager
-   ```
+Create and configure environment files:
 
-2. **Backend Setup:**
-   ```bash
-   # Install dependencies
-   npm install
+- `server/.env` (see `server/.env.example`)
+- `client/.env` (see `client/.env.example`)
 
-   # Setup Environment Variables
-   # Create a `.env` file in the root directory and add the following:
-   # DATABASE_URL="postgresql://user:password@localhost:5432/smart_tasks?schema=public"
-   # JWT_SECRET="your_super_secret_jwt_key"
-   # PORT=5000
+Typical values:
 
-   # Generate Prisma Client & Push Schema to Database
-   npx prisma generate
-   npx prisma db push
+- `server/.env`
+  - `PORT=5000`
+  - `DATABASE_URL=postgresql://...`
+  - `JWT_SECRET=your_secret`
+  - `FRONTEND_URL=http://localhost:5173`
+- `client/.env`
+  - `VITE_API_URL=http://localhost:5000`
 
-   # Start the Express server
-   npm start
-   ```
+### 3) Run the App
 
-3. **Frontend Setup:**
-   ```bash
-   # Open a new terminal tab and navigate to the client folder
-   cd client
+Start backend:
 
-   # Install frontend dependencies
-   npm install
+```bash
+cd server
+npm run dev
+```
 
-   # Start the Vite development server
-   npm run dev
-   ```
+Start frontend (new terminal):
 
-4. **View the Application:**
-   Open your browser and navigate to `http://localhost:5173`.
+```bash
+cd client
+npm run dev
+```
 
----
+Application URLs:
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:5000`
 
-## 📡 API Endpoints
+## Database (Prisma)
 
-A brief overview of the REST API endpoints exposed by the Node.js server:
+From the `server` directory:
 
-**Auth Endpoints**
-- `POST /api/auth/register` - Create a new user account
-- `POST /api/auth/login` - Authenticate and return JWT token
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
 
-**Task Endpoints**
-- `GET /api/tasks` - Retrieve all tasks for the authenticated user
-- `POST /api/tasks` - Create a new task
-- `PUT /api/tasks/:id` - Update task details or status
-- `DELETE /api/tasks/:id` - Delete a task
+Optional seed:
 
-**Category Endpoints**
-- `GET /api/categories` - Retrieve user's categories
-- `POST /api/categories` - Create a new category
-- `DELETE /api/categories/:id` - Remove a category
+```bash
+npm run seed
+```
 
----
+## Scripts
 
-## 💡 What Makes This Project "Production-Ready"?
+### Client
+- `npm run dev` - start development server
+- `npm run build` - production build
+- `npm run preview` - preview production build
 
-1. **Scalable Folder Structure:** Segregated logic into `controllers/`, `routes/`, `validators/`, and `middleware/` makes the backend extremely maintainable.
-2. **Error Handling:** Centralized async wrappers and tailored HTTP error codes provide a robust fallback mechanism without crashing the Node instance.
-3. **Data Integrity:** Leveraging Prisma's `@relation` attributes paired with `onDelete: Cascade` ensures no orphaned rows pollute the database.
-4. **Optimized Front-End Rendering:** Thoughtful use of React's `useCallback` to prevent unnecessary re-renders of the TaskList and Filters as user interactions occur.
-5. **Polished Micro-Interactions:** Custom modals, dynamic alerts, active states, and focus-rings demonstrate an eye for detail highly sought after in user-centric products.
+### Server
+- `npm run dev` - start development server
+- `npm start` - start production server
+- `npm run seed` - run seed script
 
----
+## API Summary
 
-<div align="center">
-  <p><b>Designed & Developed by Shakir Tech Solutions</b></p>
-  <p><i>If you are an employer reviewing this code, I'd love to discuss how my full-stack expertise can bring value to your engineering team! Contact details available on my GitHub profile.</i></p>
-</div>
+Base URL: `http://localhost:5000/api`
+
+- Auth
+  - `POST /auth/register`
+  - `POST /auth/login`
+- Tasks
+  - `GET /tasks`
+  - `POST /tasks`
+  - `PUT /tasks/:id`
+  - `DELETE /tasks/:id`
+- Categories
+  - `GET /categories`
+  - `POST /categories`
+  - `DELETE /categories/:id`
+
+## Documentation
+
+- [Client guide](./client/README.md)
+- [Server guide](./server/README.md)

@@ -1,14 +1,17 @@
 import express from 'express';
-import { getCategories, createCategory } from '../controllers/categoryController.js';
+import { getTasks, createTask, updateTask, deleteTask } from '../controllers/taskController.js';
 import { protectRoute } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// Enforce authentication middleware on all category endpoints
 router.use(protectRoute);
 
 router.route('/')
-  .get(getCategories)
-  .post(createCategory);
+  .get(getTasks)
+  .post(createTask);
+
+router.route('/:id')
+  .put(updateTask)
+  .delete(deleteTask);
 
 export default router;

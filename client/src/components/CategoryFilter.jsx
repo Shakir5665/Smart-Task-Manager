@@ -1,6 +1,11 @@
 import React from 'react';
 
-const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }) => {
+const CategoryFilter = ({
+  categories,
+  selectedCategory,
+  onSelectCategory,
+  onDeleteCategory,
+}) => {
   return (
     <ul className="category-list">
       <li 
@@ -31,7 +36,19 @@ const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }) => {
           }}
           onClick={() => onSelectCategory(cat.id)}
         >
-          {cat.name}
+          <span className="category-name">{cat.name}</span>
+          <button
+            type="button"
+            className={`category-delete ${selectedCategory === cat.id ? 'is-selected' : ''}`}
+            title="Delete category"
+            aria-label={`Delete category ${cat.name}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDeleteCategory?.(cat);
+            }}
+          >
+            ×
+          </button>
         </li>
       ))}
     </ul>

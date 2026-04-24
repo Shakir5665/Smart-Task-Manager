@@ -1,5 +1,4 @@
 export const errorHandler = (err, req, res, next) => {
-  // If no status code was set, default to 500
   const statusCode = res.statusCode ? res.statusCode : 500;
   
   res.status(statusCode);

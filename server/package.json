@@ -1,16 +1,22 @@
 {
-  "name": "smart-task-manager",
+  "name": "smart-task-manager-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Smart Task Manager API Server",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "prisma generate"
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node prisma/seed.js",
+    "migrate": "prisma migrate deploy",
+    "generate": "prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "bcryptjs": "^3.0.3",

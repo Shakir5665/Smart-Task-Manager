@@ -3,14 +3,12 @@ import pkg from '@prisma/client';
 const { PrismaClient } = pkg;
 const prisma = new PrismaClient();
 
-// @desc    Get all nested tasks for current user
-// @route   GET /api/tasks
 export const getTasks = async (req, res) => {
   try {
     const tasks = await prisma.task.findMany({
       where: { userId: req.user.userId },
       include: { category: true },
-      orderBy: { id: 'desc' } // Display newest created tasks first by default
+      orderBy: { id: 'desc' }
     });
     
     res.status(200).json(tasks);
@@ -19,8 +17,6 @@ export const getTasks = async (req, res) => {
   }
 };
 
-// @desc    Create a new task under current user
-// @route   POST /api/tasks
 export const createTask = async (req, res) => {
   try {
     const { title, description, status, priority, dueDate, categoryId } = req.body;
@@ -37,7 +33,7 @@ export const createTask = async (req, res) => {
         priority: priority ? parseInt(priority) : 1,
         dueDate: dueDate ? new Date(dueDate) : null,
         categoryId: categoryId ? parseInt(categoryId) : null,
-        userId: req.user.userId // Inherit nested context automatically extracted from JWT
+        userId: req.user.userId
       },
       include: { category: true }
     });
@@ -48,14 +44,11 @@ export const createTask = async (req, res) => {
   }
 };
 
-// @desc    Update an existing task
-// @route   PUT /api/tasks/:id
 export const updateTask = async (req, res) => {
   try {
     const taskId = parseInt(req.params.id);
     const { title, description, status, priority, dueDate, categoryId } = req.body;
 
-    // 1. Double verify the task belongs specifically to the authenticated user
     const task = await prisma.task.findFirst({
       where: { id: taskId, userId: req.user.userId },
     });
@@ -64,7 +57,6 @@ export const updateTask = async (req, res) => {
       return res.status(404).json({ message: 'Task not found or unauthorized operation' });
     }
 
-    // 2. Overwrite specific records conditionally without touching others
     const updatedTask = await prisma.task.update({
       where: { id: taskId },
       data: {
@@ -84,13 +76,10 @@ export const updateTask = async (req, res) => {
   }
 };
 
-// @desc    Delete an existing task
-// @route   DELETE /api/tasks/:id
 export const deleteTask = async (req, res) => {
   try {
     const taskId = parseInt(req.params.id);
 
-    // 1. Similar verification that they legitimately own this target record
     const task = await prisma.task.findFirst({
       where: { id: taskId, userId: req.user.userId },
     });
@@ -99,7 +88,6 @@ export const deleteTask = async (req, res) => {
       return res.status(404).json({ message: 'Task not found or unauthorized operation' });
     }
 
-    // 2. Terminate the database entity permanently
     await prisma.task.delete({
       where: { id: taskId },
     });

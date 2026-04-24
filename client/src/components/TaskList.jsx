@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ tasks, refreshTasks }) => {
+const TaskList = ({ tasks, refreshTasks, categories }) => {
   if (!tasks || tasks.length === 0) {
     return (
       <div className="empty-state">
@@ -17,7 +17,12 @@ const TaskList = ({ tasks, refreshTasks }) => {
   return (
     <div className="task-list">
       {tasks.map(task => (
-        <TaskItem key={task.id} task={task} refreshTasks={refreshTasks} />
+        <TaskItem
+          key={task.id}
+          task={task}
+          refreshTasks={refreshTasks}
+          categories={categories}
+        />
       ))}
     </div>
   );

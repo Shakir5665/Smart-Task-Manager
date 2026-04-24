@@ -4,7 +4,6 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 
 function App() {
-  // Ultra-simple authentication check (for demo purposes)
   const checkAuth = () => {
     return !!localStorage.getItem('token');
   };
@@ -21,7 +20,6 @@ function App() {
             element={checkAuth() ? <Dashboard /> : <Navigate to="/login" />} 
           />
           
-          {/* Default redirect based on current context */}
           <Route 
             path="/" 
             element={<Navigate to={checkAuth() ? "/dashboard" : "/login"} />} 
