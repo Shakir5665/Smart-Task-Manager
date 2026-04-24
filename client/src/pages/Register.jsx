@@ -36,8 +36,9 @@ const Register = () => {
     <div className="auth-page">
       <div className="auth-container">
         <div className="auth-form-wrapper">
+
           <div className="auth-header">
-            <img src="/assets/logo.png" alt="Smart Task Manager" />
+             <img src="/assets/logo.png" alt="Smart Task Manager"/>
             <h2>Create Account</h2>
             <p>Start managing your tasks effectively.</p>
           </div>
@@ -228,54 +229,7 @@ const Register = () => {
       </div>
 
       {/* Floating Author Signature */}
-      <div
-        style={{
-          position: "absolute",
-          top: "1.5rem",
-          left: "1.5rem",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.75rem",
-          background: "rgba(255, 255, 255, 0.95)",
-          padding: "0.5rem 1rem",
-          borderRadius: "50px",
-          boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
-        }}
-      >
-        <img
-          src="/assets/shakir_logo.jpg"
-          alt="Shakir Tech"
-          style={{
-            height: "28px",
-            width: "28px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            boxShadow: "0 0 0 2px white, 0 0 0 3px var(--primary)",
-          }}
-        />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span
-            style={{
-              fontSize: "0.6rem",
-              color: "var(--text-muted)",
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              fontWeight: "600",
-            }}
-          >
-            Designed & Developed by
-          </span>
-          <strong
-            style={{
-              fontSize: "0.85rem",
-              color: "var(--text-main)",
-              lineHeight: "1.1",
-            }}
-          >
-            Shakir Tech Solutions
-          </strong>
-        </div>
-      </div>
+      
     </div>
   );
 };

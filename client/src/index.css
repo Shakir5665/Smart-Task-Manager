@@ -427,9 +427,9 @@ body {
 }
 
 .auth-header img {
-  width: 56px;
-  height: 56px;
-  margin-bottom: 1.5rem;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1.0rem;
   border-radius: var(--radius-lg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -460,6 +460,8 @@ body {
     border-radius: 0;
     min-height: 100vh;
   }
+
+  
 
   .auth-hero {
     display: none;
