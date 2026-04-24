@@ -16,5 +16,9 @@
     "deploymentEnabled": {
       "main": true
     }
-  }
+  },
+  
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
 }
