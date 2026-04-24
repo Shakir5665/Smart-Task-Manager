@@ -17,8 +17,9 @@
       "main": true
     }
   },
-  
-  "routes": [
-    { "src": "/(.*)", "dest": "/" }
+
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
   ]
+
 }
