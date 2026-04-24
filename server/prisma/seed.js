@@ -14,9 +14,9 @@ async function main() {
   // Create Example User with nested Categories and Tasks
   const user = await prisma.user.create({
     data: {
-      name: 'John Doe',
-      email: 'john@example.com',
-      password: 'hashed_password_123', // REMEMBER: Use bcrypt/argon2 in production!
+      name: 'Mohamed Shkair',
+      email: 'shakir123@gmail.com',
+      password: 'skr123', // REMEMBER: Use bcrypt/argon2 in production!
       categories: {
         create: [
           { name: 'Development' },
